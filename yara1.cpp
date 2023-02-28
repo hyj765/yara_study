@@ -60,15 +60,18 @@ int main()
     // Initialize Yara
     const char* buffer = "Hello, world!";
     yr_initialize();
-
+    
     // Create a new compiler
-    yr_compiler_create(&compiler);
-
+    result =yr_compiler_create(&compiler);
+    if(result != ERROR_SUCCESS){
+        printf("yara copiler create fail");
+        goto _exit;
+    }
     // Compile the rule
     result = yr_compiler_add_string(compiler, rule_string, nullptr);
     if (result != ERROR_SUCCESS)
     {
-       // std::cout << "Failed to compile rule: " << yr_compiler_get_error_message(compiler) << std::endl;
+        printf("yara compile add string fail");
         goto _exit;
     }
 
@@ -76,6 +79,7 @@ int main()
     result = yr_compiler_get_rules(compiler, &rules);
     if (result != ERROR_SUCCESS)
     {
+        printf("yara get rule fail");
         goto _exit;
     }
 
