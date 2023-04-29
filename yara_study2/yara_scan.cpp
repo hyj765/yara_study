@@ -22,3 +22,7 @@ void YaraScanner::ReleaseInstance() {
 int YaraScanner::LoadRulesFromFile(const char* rulespath) {
 	return yr_rules_load(rulespath, &yr_rules);
 }
+
+int YaraScanner::ScanFile(const char* filepath,YR_CALLBACK_FUNC func) {
+	return yr_rules_scan_file(yr_rules, filepath, SCAN_FLAGS_FAST_MODE, func, nullptr,0 );
+}

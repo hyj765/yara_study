@@ -38,5 +38,7 @@ public:
 	static YaraScanner* GetInstance();
 	static void ReleaseInstance();
 	int LoadRulesFromFile(const char* rulepath);
-	
+	int ScanFile(const char* filepath,YR_CALLBACK_FUNC func);
+	int ScanMem(uint8_t* memory,YR_CALLBACK_FUNC func);
+	int ScanFd(YR_FILE_DESCRIPTOR fd, YR_CALLBACK_FUNC func);
 };
